@@ -72,7 +72,7 @@ export default function Screen1() {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.title}>Instagram Login </Text>
+      <Text style={styles.title}>Instagram Login </Text>
       <TextInput
         placeholder="Username"
         value={username}
@@ -111,14 +111,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F0F4F8", // Light gray background
   },
-  
+
   title: {
     fontSize: 28,
     fontWeight: "600",
     textAlign: "center",
     marginBottom: 40,
-    color: "#1A1A1A", // Darker text color
+    color: "#1A1A1A", 
+    fontFamily: "TimesNewRoman", 
   },
+  
   input: {
     height: 50,
     borderColor: "#E0E0E0",
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     paddingVertical: 15, // Adjusted for better touch targets
-    backgroundColor: "#4C8BF5", // Blue button color
+    backgroundColor: "#2D6ABA", // Blue button color
     borderRadius: 30, // Rounded edges
     alignItems: "center",
     justifyContent: "center", // Center the text
@@ -151,22 +153,28 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff", // White text color
-    fontSize: 18, // Slightly larger text for readability
-    fontWeight: "bold",
+    fontSize: 16, // Slightly larger text for readability
+    fontWeight: "400",
   },
 
   downloadButton: {
     marginTop: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    backgroundColor: "#4C8BF5", // Blue button color
-    borderRadius: 25,
+    paddingVertical: 15, // Padding for consistent height
+    backgroundColor: "#FFFFFF", // White background
+    borderWidth: 2, // Blue border
+    borderColor: "#5E79AD", // Border color matches the theme
+    borderRadius: 30, // Rounded corners
     alignItems: "center",
-    width: "90%",
+    justifyContent: "center",
+    width: "90%", // Button width
+    alignSelf: "center", // Center horizontally
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   downloadText: {
-    color: "#FFFFFF",
-    fontSize: 16,
+    color: "black",
+    fontSize: 13,
     fontWeight: "500",
   },
 });

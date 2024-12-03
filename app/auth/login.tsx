@@ -18,7 +18,7 @@ const Login = () => {
       initialValues={{username:"" , password: ""}}
       onSubmit={(values) => {
         console.log(values)
-        router.push("../(tabs)")}
+        router.push("../(tabs2)")}
       }
       validationSchema={validationSchema}
       >

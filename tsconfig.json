@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/(tabs)/screen1.tsx", "app/(tabs)/screen2.tsx", "app/(tabs)/screen3.tsx", "app/(tabs)/screen4.tsx", "app/(tabs)/PDFdisplay.tsx", "app/(tabs)/index.tsx", "app/(tabs)/explore.tsx", "app/(tabs)/_layout.tsx", "app/_layout.tsx", "app/+not-found.tsx", "app/HomeScreen.tsx", "app/MainLogin.tsx"  ]
+, "app/(tabs)/screen1.tsx", "app/(tabs)/screen2.tsx", "app/(tabs)/screen3.tsx", "app/(tabs)/screen4.tsx", "app/(tabs)/PDFdisplay.tsx", "app/(tabs)/index.tsx", "app/(tabs)/extract.tsx", "app/(tabs)/_layout.tsx", "app/_layout.tsx", "app/+not-found.tsx", "app/HomeScreen.tsx", "app/MainLogin.tsx"  ]
 }
