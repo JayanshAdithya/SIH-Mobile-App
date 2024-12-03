@@ -15,7 +15,7 @@ const Login = () => {
     <View>
       <Text>Login</Text>
       <Formik
-      initialValues={{username: "abcd", password: "123456789"}}
+      initialValues={{username:"" , password: ""}}
       onSubmit={(values) => {
         console.log(values)
         router.push("../(tabs)")}
