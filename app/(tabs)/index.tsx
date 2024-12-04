@@ -28,3 +28,32 @@ const App = () => {
 
 export default App;
 
+<<<<<<< HEAD
+=======
+// Testing the SearchBar
+
+// // App.js
+// import React from 'react';
+// import SearchBar from '../../components/SearchBar'; // Adjust the path as necessary
+
+// const App = () => {
+//     const pdfFileNames = [
+//         'report.pdf',
+//         'summary.pdf',
+//         'presentation.pdf',
+//         'notes.pdf',
+//         'data.pdf',
+//         'darvin.pdf',
+//         'overview.pdf',
+//     ];
+
+//     return (
+//         <div style={{ padding: '20px' }}>
+//             <h1>PDF File Search</h1>
+//             <SearchBar items={pdfFileNames} />
+//         </div>
+//     );
+// };
+
+// export default App;
+>>>>>>> origin/master-update
