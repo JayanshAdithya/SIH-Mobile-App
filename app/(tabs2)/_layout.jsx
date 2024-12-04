@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Stack,Tabs } from 'expo-router'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Tabs } from 'expo-router';
 
 const _layout = () => {
   return (
     <Tabs>
-        {/* <Tabs.Screen name="index" options={{headerShown:false}} /> */}
-        <Tabs.Screen name="extract" options={{headerShown:true, title:"Extract"}} />
-        <Tabs.Screen name="generate" options={{headerShown:false, title:"Generate"}} />
-        {/* <Tabs.Screen name="extract" options={{headerShown:false, title:"Generate"}} /> */}
+      {/* Define the tabs/screens you need */}
+      <Tabs.Screen name="extract" options={{ headerShown: true, title: "Extract" }} />
+      <Tabs.Screen name="generate" options={{ headerShown: false, title: "Generate" }} />
+      <Tabs.Screen name="displayingIcons" options={{ headerShown: true, title: "Displaying Icons" }} />
     </Tabs>
-  )
-}
+  );
+};
 
-export default _layout
+export default _layout;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, Button, Alert } from "react-native";
+import { useRouter } from 'expo-router';
 
 const Extract = () => {
   const [selectedIcons, setSelectedIcons] = useState({
@@ -8,7 +9,7 @@ const Extract = () => {
     facebook: false,
     telegram: false,
   }); // State to track selected icons
-
+  const router = useRouter();
   const toggleSelection = (iconName) => {
     setSelectedIcons((prev) => ({
       ...prev,
@@ -21,9 +22,13 @@ const Extract = () => {
       (icon) => selectedIcons[icon]
     );
 
-    Alert.alert("Selected Platforms", selectedPlatforms.join(", ") || "None");
+    console.log("Selected platforms:", selectedPlatforms);
+    router.push({
+      pathname: '/displayingIcons',
+      params: { selectedPlatforms: JSON.stringify(selectedPlatforms) }, 
+    });
 
-    // Reset all platforms to false
+
     setSelectedIcons({
       twitter: false,
       instagram: false,
@@ -187,3 +192,4 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
+  
