@@ -3,48 +3,59 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Validation schema for the form
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required").label("Username"),
-  password: Yup.string().required("Password is required").label("Password"),
+  name: Yup.string().required("Name is required").label("Name"),
+  caseId: Yup.string().required("Case ID is required").label("Case ID"),
 });
 
-const Login = () => {
+const CaseInformation = () => {
   const router = useRouter();
+
+  const storeCaseInformation = async (values) => {
+    try {
+      await AsyncStorage.setItem('caseInfo', JSON.stringify(values));
+      console.log("Case information stored successfully!");
+    } catch (error) {
+      console.error("Error storing case information", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Case Information</Text>
       <Formik
-        initialValues={{ username: "", password: "" }}
+        initialValues={{ name: "", caseId: "" }}
         onSubmit={(values) => {
           console.log(values);
-          // Navigate to the Case Information screen after successful login
-          router.push("/(tabs2)/case");
+          // Store case information
+          storeCaseInformation(values);
+          // Navigate to the Extract page after successful submission
+          router.push("/(tabs2)/extract");
         }}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.form}>
-            <Text style={styles.label}>Username</Text>
+            <Text style={styles.label}>Enter Name</Text>
             <TextInput
               style={styles.input}
-              placeholder="Enter your username"
+              placeholder="Enter your name"
               placeholderTextColor="#ccc"
-              onChangeText={handleChange("username")}
-              onBlur={handleBlur("username")}
-              value={values.username}
+              onChangeText={handleChange("name")}
+              onBlur={handleBlur("name")}
+              value={values.name}
             />
-            <Text style={styles.label}>Password</Text>
+            <Text style={styles.label}>Case ID</Text>
             <TextInput
               style={styles.input}
-              placeholder="Enter your password"
+              placeholder="Enter case ID"
               placeholderTextColor="#ccc"
-              secureTextEntry
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
+              onChangeText={handleChange("caseId")}
+              onBlur={handleBlur("caseId")}
+              value={values.caseId}
             />
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
@@ -56,7 +67,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CaseInformation;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -103,7 +115,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     backgroundColor: "#3D4AB1",
-    borderRadius: 10,
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
