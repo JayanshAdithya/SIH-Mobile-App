@@ -3,33 +3,21 @@ import { Stack } from "expo-router";
 export default function AppLayout() {
   return (
     <Stack>
-<<<<<<< HEAD
-      {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
-      <Stack.Screen name="(tabs2)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)/+not-found" options={{ title: "Not Found" }} />
-    </Stack>
-  );
-}
-=======
-      {/* Routes to screens inside (tabs) */}
+      {/* Set the login screen as the initial route without a header */}
+      <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+      
+      {/* Define the main tab layout without a header */}
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       
+      {/* Define the second tab layout without a header */}
+      <Stack.Screen name="(tabs2)" options={{ headerShown: false }} />
+
+      
+      {/* Define the Extract page directly */}
+      <Stack.Screen name="(tabs2)/extract" options={{ headerShown: true }} />
       
       {/* Fallback for unmatched routes */}
       <Stack.Screen name="(tabs)/+not-found" options={{ title: "Not Found" }} />
-
-      
     </Stack>
   );
 }
-
-
-// export default function Layout() {
-//   return (
-//     <View style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
-//       <StatusBar barStyle="dark-content" />
-//       <Slot /> {/* Slot is used for nested navigation */}
-//     </View>
-//   );
-// }
->>>>>>> origin/master-update

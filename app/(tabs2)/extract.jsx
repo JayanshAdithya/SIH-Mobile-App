@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { useRouter } from 'expo-router';
 
 const Extract = () => {
@@ -10,6 +10,7 @@ const Extract = () => {
     telegram: false,
   }); // State to track selected icons
   const router = useRouter();
+
   const toggleSelection = (iconName) => {
     setSelectedIcons((prev) => ({
       ...prev,
@@ -23,12 +24,14 @@ const Extract = () => {
     );
 
     console.log("Selected platforms:", selectedPlatforms);
+    
+    // Navigate to the Displaying Icons screen with selected platforms
     router.push({
       pathname: '/displayingIcons',
       params: { selectedPlatforms: JSON.stringify(selectedPlatforms) }, 
     });
 
-
+    // Reset selected icons after navigation
     setSelectedIcons({
       twitter: false,
       instagram: false,
@@ -59,7 +62,7 @@ const Extract = () => {
             }}
             style={styles.icon}
           />
-          <Text style={styles.label}>Twitter</Text>
+          <Text style={styles.label}>X</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -153,43 +156,44 @@ const styles = StyleSheet.create({
   square: {
     width: 100,
     height: 100,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFFFF ",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowRadius: 2,
+    elevation: 1,
   },
   selectedSquare: {
-    backgroundColor: "#ADD8E6", // Light blue for selected state
+    borderColor: "#1E90FF",
     borderWidth: 2,
-    borderColor: "#1E90FF", // Blue border for selected state
   },
   icon: {
     width: 50,
     height: 50,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   label: {
-    fontSize: 14,
-    fontWeight: "500",
+    fontSize: 16,
     color: "#333333",
   },
-  button: {
+  button: {     
     marginTop: 20,
     width: "60%",
     paddingVertical: 10,
     borderRadius: 8,
+    backgroundColor: "#3D4AB1",
     justifyContent: "center",
     alignItems: "center",
   },
   buttonText: {
     color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
-  

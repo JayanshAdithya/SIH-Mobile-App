@@ -5,10 +5,22 @@ import { Tabs } from 'expo-router';
 const _layout = () => {
   return (
     <Tabs>
-      {/* Define the tabs/screens you need */}
+      {/* Main Login Screen */}
+      <Tabs.Screen name="auth/login" options={{ headerShown: false, title: "Login" }} />
+      
+      {/* New Case Screen */}
+      <Tabs.Screen name="case" options={{ headerShown: true, title: "Case Information" }} />
+      
+      {/* Extract Screen */}
       <Tabs.Screen name="extract" options={{ headerShown: true, title: "Extract" }} />
+      
+      {/* Generate Screen */}
       <Tabs.Screen name="generate" options={{ headerShown: false, title: "Generate" }} />
-      <Tabs.Screen name="displayingIcons" options={{ headerShown: true, title: "Displaying Icons" }} />
+      
+      {/* Displaying Icons Screen */}
+      <Tabs.Screen name="displayingIcons" options={{ headerShown: true, title: "Login Information" }} />
+
+      <Tabs.Screen name="analyze" options={{ headerShown: true, title: "Analysis" }} />
     </Tabs>
   );
 };

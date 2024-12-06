@@ -1,14 +1,10 @@
 import { Tabs } from "expo-router";
-<<<<<<< HEAD
 import { FontAwesome } from "@expo/vector-icons";
-=======
->>>>>>> origin/master-update
 
 export default function TabsLayout() {
   return (
     <Tabs>
       {/* <Tabs.Screen name="MainLogin" options={{ headerShown: false }} /> */}
-<<<<<<< HEAD
       <Tabs.Screen
         name="explore"
         options={{
@@ -65,7 +61,7 @@ export default function TabsLayout() {
           ),
         }}
       />
-=======
+
       <Tabs.Screen name="explore" options={{ title: "Explore" }} />
       <Tabs.Screen name="screen1" options={{ title: "Instagram" }} />
       <Tabs.Screen name="screen2" options={{ title: "X" }} />
@@ -73,15 +69,11 @@ export default function TabsLayout() {
       <Tabs.Screen name="screen4" options={{ title: "Facebook" }} />
       {/* <Tabs.Screen name="PDFdisplay" options={{ title: "PDF Display" }} /> */}
       <Tabs.Screen name="index" options={{ headerShown: false }} />
->>>>>>> origin/master-update
     </Tabs>
   );
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master-update
 // import { createStackNavigator } from '@react-navigation/stack';
 // import Home from './index';
 // import Screen1 from './screen1';
@@ -102,9 +94,3 @@ export default function TabsLayout() {
 //     </Stack.Navigator>
 //   );
 // }
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> origin/master-update
