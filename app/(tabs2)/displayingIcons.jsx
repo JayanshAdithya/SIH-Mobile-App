@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useGlobalSearchParams, useRouter } from 'expo-router'; 
 import {
@@ -22,10 +21,10 @@ const DisplayingIcons = () => {
     : [];
 
   const initialCredentials = {
-    twitter: { username: '', password: '' },
+    x: { username: '', password: '' }, // Changed from twitter to x
     instagram: { username: '', password: '' },
     facebook: { username: '', password: '' },
-    telegram: { username: '', password: '' },
+    google: { username: '', password: '' }, // Changed from telegram to google
   };
 
   const [credentials, setCredentials] = useState(initialCredentials);
@@ -44,22 +43,6 @@ const DisplayingIcons = () => {
     }));
   };
 
-  const goToNextSlide = () => {
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < selectedPlatforms.length) {
-      setCurrentIndex(nextIndex);
-      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
-    }
-  };
-
-  const goToPreviousSlide = () => {
-    const prevIndex = currentIndex - 1;
-    if (prevIndex >= 0) {
-      setCurrentIndex(prevIndex);
-      flatListRef.current?.scrollToIndex({ index: prevIndex, animated: true });
-    }
-  };
-
   const handleSubmit = async () => {
     if (loading) return; 
     setLoading(true); 
@@ -73,11 +56,10 @@ const DisplayingIcons = () => {
     }
   };
 
-  useEffect(() => {
-    if (loading) {
-      setLoading(false); 
-    }
-  }, [currentIndex]);
+  const handleExtract = (platform) => {
+    const { username, password } = credentials[platform];
+    Alert.alert(`Extracted ${platform}`, `Username: ${username}\nPassword: ${password}`);
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
@@ -99,6 +81,12 @@ const DisplayingIcons = () => {
           secureTextEntry
         />
       </View>
+      <TouchableOpacity 
+        style={styles.extractButton} 
+        onPress={() => handleExtract(item)}
+      >
+        <Text style={styles.buttonText}>Extract</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -119,10 +107,13 @@ const DisplayingIcons = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
+            snapToAlignment="center" // Ensures the item snaps to the center
+            snapToInterval={300} // Adjust this value based on your card width
             onMomentumScrollEnd={(event) => {
               const index = Math.floor(event.nativeEvent.contentOffset.x / event.nativeEvent.layoutMeasurement.width);
               setCurrentIndex(index);
             }}
+            contentContainerStyle={styles.flatListContent} // Add padding to the Flat List
           />
           <View style={styles.submitContainer}>
             <TouchableOpacity 
@@ -227,18 +218,24 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10, 
   },
+  flatListContent: {
+    paddingHorizontal: 10, 
+  },
+  extractButton: {
+    backgroundColor: '#3D4AB1', 
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    alignItems: 'center',
+  },
 });
 
 export default DisplayingIcons;
 
 
 
-
-
-
-
 // import React, { useState, useRef, useEffect } from 'react';
-// import { useGlobalSearchParams } from 'expo-router';
+// import { useGlobalSearchParams, useRouter } from 'expo-router'; 
 // import {
 //   StyleSheet,
 //   Text,
@@ -254,6 +251,7 @@ export default DisplayingIcons;
 
 // const DisplayingIcons = () => {
 //   const params = useGlobalSearchParams(); 
+//   const router = useRouter(); // Initialize the router
 //   const selectedPlatforms = params.selectedPlatforms
 //     ? JSON.parse(params.selectedPlatforms)
 //     : [];
@@ -262,7 +260,7 @@ export default DisplayingIcons;
 //     twitter: { username: '', password: '' },
 //     instagram: { username: '', password: '' },
 //     facebook: { username: '', password: '' },
-//     telegram: { username: '', password: '' },
+//     google: { username: '', password: '' }, // Changed from telegram to google
 //   };
 
 //   const [credentials, setCredentials] = useState(initialCredentials);
@@ -281,40 +279,18 @@ export default DisplayingIcons;
 //     }));
 //   };
 
-//   const goToNextSlide = () => {
-//     const nextIndex = currentIndex + 1;
-//     if (nextIndex < selectedPlatforms.length) {
-//       setCurrentIndex(nextIndex);
-//       flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
-//     }
-//   };
-
-//   const goToPreviousSlide = () => {
-//     const prevIndex = currentIndex - 1;
-//     if (prevIndex >= 0) {
-//       setCurrentIndex(prevIndex);
-//       flatListRef.current?.scrollToIndex({ index: prevIndex, animated: true });
-//     }
-//   };
-
 //   const handleSubmit = async () => {
-//     if (loading) return; // Prevent multiple submissions
-//     setLoading(true); // Start loading
+//     if (loading) return; 
+//     setLoading(true); 
 //     Alert.alert('Submitted Data', JSON.stringify(credentials, null, 2));
 
 //     try {
-//       await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a network request
-//       setShowAnalysisButton(true); // Show the Analysis button after submit
+//       await new Promise((resolve) => setTimeout(resolve, 2000)); 
+//       setShowAnalysisButton(true); 
 //     } catch (error) {
 //       Alert.alert('Error', 'There was an error submitting the data.');
 //     }
 //   };
-
-//   useEffect(() => {
-//     if (loading) {
-//       setLoading(false); 
-//     }
-//   }, [currentIndex]);
 
 //   const renderItem = ({ item }) => (
 //     <View style={styles.card}>
@@ -356,14 +332,17 @@ export default DisplayingIcons;
 //             horizontal
 //             showsHorizontalScrollIndicator={false}
 //             pagingEnabled
+//             snapToAlignment="center" // Ensures the item snaps to the center
+//             snapToInterval={300} // Adjust this value based on your card width
 //             onMomentumScrollEnd={(event) => {
 //               const index = Math.floor(event.nativeEvent.contentOffset.x / event.nativeEvent.layoutMeasurement.width);
 //               setCurrentIndex(index);
 //             }}
+//             contentContainerStyle={styles.flatListContent} // Add padding to the FlatList
 //           />
 //           <View style={styles.submitContainer}>
 //             <TouchableOpacity 
-//  style={[styles.button, loading && styles.loadingButton]} 
+//               style={[styles.button, loading && styles.loadingButton]} 
 //               onPress={handleSubmit} 
 //               disabled={loading} 
 //             >
@@ -374,14 +353,17 @@ export default DisplayingIcons;
 //               )}
 //             </TouchableOpacity>
 //           </View>
-//           {showAnalysisButton && ( // Conditionally render the new button
-//             <TouchableOpacity 
-//               style={styles.newButton} 
-//               onPress={() => console.log('Analysis button pressed')}
-//             >
-//               <Text style={styles.buttonText}>Analysis</Text>
-//             </TouchableOpacity>
-//           )}
+//           {showAnalysisButton && ( 
+//           <TouchableOpacity 
+//             style={styles.newButton} 
+//             onPress={() => {
+//               console.log(credentials); 
+//               router.push("/(tabs2)/analyze"); 
+//             }}
+//           >
+//             <Text style={styles.buttonText}>Analysis</Text>
+//           </TouchableOpacity>
+//         )}
 //         </>
 //       ) : (
 //         <Text style={styles.noneText}>None</Text>
@@ -455,11 +437,14 @@ export default DisplayingIcons;
 //     backgroundColor: '#6c757d',
 //   },
 //   newButton: {
-//     backgroundColor: '#3D4AB1', // Same color as other buttons
+//     backgroundColor: '#3D4AB1', 
 //     padding: 10,
 //     borderRadius: 5,
 //     width: '100%',
-//     marginTop: 10, // Add some margin for spacing
+//     marginTop: 10, 
+//   },
+//   flatListContent: {
+//     paddingHorizontal: 10, 
 //   },
 // });
 
@@ -467,9 +452,8 @@ export default DisplayingIcons;
 
 
 
-
 // import React, { useState, useRef, useEffect } from 'react';
-// import { useGlobalSearchParams } from 'expo-router';
+// import { useGlobalSearchParams, useRouter } from 'expo-router'; 
 // import {
 //   StyleSheet,
 //   Text,
@@ -485,6 +469,7 @@ export default DisplayingIcons;
 
 // const DisplayingIcons = () => {
 //   const params = useGlobalSearchParams(); 
+//   const router = useRouter(); // Initialize the router
 //   const selectedPlatforms = params.selectedPlatforms
 //     ? JSON.parse(params.selectedPlatforms)
 //     : [];
@@ -499,6 +484,7 @@ export default DisplayingIcons;
 //   const [credentials, setCredentials] = useState(initialCredentials);
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const [loading, setLoading] = useState(false);
+//   const [showAnalysisButton, setShowAnalysisButton] = useState(false); // State for Analysis button
 //   const flatListRef = useRef(null);
 
 //   const handleInputChange = (platform, field, value) => {
@@ -533,14 +519,12 @@ export default DisplayingIcons;
 //     Alert.alert('Submitted Data', JSON.stringify(credentials, null, 2));
 
 //     try {
-//       // We will change this later when we actually do the backend
 //       await new Promise((resolve) => setTimeout(resolve, 2000)); 
+//       setShowAnalysisButton(true); 
 //     } catch (error) {
 //       Alert.alert('Error', 'There was an error submitting the data.');
 //     }
-//     // Do not set loading to false here, keep it true until tab change
 //   };
-
 
 //   useEffect(() => {
 //     if (loading) {
@@ -589,7 +573,7 @@ export default DisplayingIcons;
 //             showsHorizontalScrollIndicator={false}
 //             pagingEnabled
 //             onMomentumScrollEnd={(event) => {
-//               const index = Math.floor(event.nativeEvent.contentOffset.x / event.nativeEvent.layoutMeasurement.width );
+//               const index = Math.floor(event.nativeEvent.contentOffset.x / event.nativeEvent.layoutMeasurement.width);
 //               setCurrentIndex(index);
 //             }}
 //           />
@@ -606,6 +590,17 @@ export default DisplayingIcons;
 //               )}
 //             </TouchableOpacity>
 //           </View>
+//           {showAnalysisButton && ( 
+//           <TouchableOpacity 
+//             style={styles.newButton} 
+//             onPress={() => {
+//               console.log(credentials); 
+//               router.push("/(tabs2)/analyze"); 
+//             }}
+//           >
+//             <Text style={styles.buttonText}>Analysis</Text>
+//           </TouchableOpacity>
+//         )}
 //         </>
 //       ) : (
 //         <Text style={styles.noneText}>None</Text>
@@ -678,7 +673,19 @@ export default DisplayingIcons;
 //   loadingButton: {
 //     backgroundColor: '#6c757d',
 //   },
+//   newButton: {
+//     backgroundColor: '#3D4AB1', 
+//     padding: 10,
+//     borderRadius: 5,
+//     width: '100%',
+//     marginTop: 10, 
+//   },
 // });
 
 // export default DisplayingIcons;
+
+
+
+
+
 

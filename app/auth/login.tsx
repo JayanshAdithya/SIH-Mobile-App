@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
 // Validation schema for the form
@@ -13,16 +15,38 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const router = useRouter();
 
+  const handleLogin = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://192.168.0.103:8000/api/v1/users/login",
+        values,
+        { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+      );
+
+      // Store JWT token in AsyncStorage
+      const { token } = response.data;
+      console.log(response.data)
+      
+      await AsyncStorage.setItem('jwtToken', token);
+      
+      const token1 = await AsyncStorage.getItem('jwtToken');
+      console.log("token1:\n",token1);
+      Alert.alert("Success", "Login successful!");
+
+      // Navigate to the Case Information screen
+      router.push("/(tabs2)/case");
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Invalid username or password. Please try again.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={(values) => {
-          console.log(values);
-          // Navigate to the Case Information screen after successful login
-          router.push("/(tabs2)/case");
-        }}
+        onSubmit={handleLogin}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
