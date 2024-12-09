@@ -107,7 +107,7 @@ const DisplayingIcons = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
-            snapToAlignment="center" // Ensures the item snaps to the center
+            snapToAlignment="center" 
             snapToInterval={300} // Adjust this value based on your card width
             onMomentumScrollEnd={(event) => {
               const index = Math.floor(event.nativeEvent.contentOffset.x / event.nativeEvent.layoutMeasurement.width);
@@ -151,12 +151,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#F9F9F9',
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#3D4AB1',
+    color: '#000000',
     marginBottom: 20,
   },
   card: {
@@ -164,13 +164,19 @@ const styles = StyleSheet.create({
     height: 350,
     padding: 20,
     borderRadius: 10,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#FFFFFF',
     marginRight: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+
   },
   platformName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#3D4AB1',
+    color: '#000000',
     marginBottom: 10,
   },
   formGroup: {
@@ -192,7 +198,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#3D4AB1', 
+    backgroundColor: '#000000', 
     padding: 10,
     borderRadius: 5,
     width: '100%',
@@ -212,7 +218,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#6c757d',
   },
   newButton: {
-    backgroundColor: '#3D4AB1', 
+    backgroundColor: '#000000', 
     padding: 10,
     borderRadius: 5,
     width: '100%',
@@ -222,7 +228,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10, 
   },
   extractButton: {
-    backgroundColor: '#3D4AB1', 
+    backgroundColor: '#000000', 
     padding: 10,
     borderRadius: 5,
     marginTop: 10,

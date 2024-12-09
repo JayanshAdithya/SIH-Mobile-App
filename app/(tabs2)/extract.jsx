@@ -42,7 +42,7 @@ const Extract = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Select Your Social Media</Text>
+      <Text style={styles.heading}>Select Your Platform</Text>
 
       <View style={styles.row}>
         <TouchableOpacity
@@ -117,7 +117,7 @@ const Extract = () => {
       <TouchableOpacity
         style={[
           styles.button,
-          { backgroundColor: isButtonEnabled ? "#3D4AB1" : "#CCCCCC" },
+          { backgroundColor: isButtonEnabled ? "#000000" : "#CCCCCC" },
         ]}
         disabled={!isButtonEnabled}
         onPress={handleButtonClick}
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   selectedSquare: {
-    borderColor: "#3D4AB1",
+    borderColor: "#000000",
     borderWidth: 2,
   },
   icon: {
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     width: "60%",
     paddingVertical: 10,
     borderRadius: 8,
-    backgroundColor: "#3D4AB1",
+    backgroundColor: "#000000",
     justifyContent: "center",
     alignItems: "center",
   },
