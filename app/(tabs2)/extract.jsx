@@ -1,44 +1,30 @@
+
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { useRouter } from 'expo-router';
 
 const Extract = () => {
-  const [selectedIcons, setSelectedIcons] = useState({
-    x: false, 
-    instagram: false,
-    facebook: false,
-    google: false, 
-  }); 
+  const [selectedIcon, setSelectedIcon] = useState(null); // Change to store a single selected icon
   const router = useRouter();
 
   const toggleSelection = (iconName) => {
-    setSelectedIcons((prev) => ({
-      ...prev,
-      [iconName]: !prev[iconName],
-    }));
+    setSelectedIcon(iconName); // Set the selected icon to the clicked one
   };
 
   const handleButtonClick = () => {
-    const selectedPlatforms = Object.keys(selectedIcons).filter(
-      (icon) => selectedIcons[icon]
-    );
+    if (!selectedIcon) return; // Prevent submission if no icon is selected
 
-    console.log("Selected platforms:", selectedPlatforms);
+    console.log("Selected platform:", selectedIcon);
 
     router.push({
       pathname: '/displayingIcons',
-      params: { selectedPlatforms: JSON.stringify(selectedPlatforms) }, 
+      params: { selectedPlatforms: JSON.stringify([selectedIcon]) }, // Pass the selected icon as an array
     });
 
-    setSelectedIcons({
-      x: false, 
-      instagram: false,
-      facebook: false,
-      google: false, 
-    });
+    setSelectedIcon(null); // Reset selection after navigation
   };
 
-  const isButtonEnabled = Object.values(selectedIcons).some((value) => value);
+  const isButtonEnabled = selectedIcon !== null; // Button is enabled if an icon is selected
 
   return (
     <View style={styles.container}>
@@ -48,13 +34,13 @@ const Extract = () => {
         <TouchableOpacity
           style={[
             styles.square,
-            selectedIcons.x && styles.selectedSquare,
+            selectedIcon === "x" && styles.selectedSquare, // Highlight if selected
           ]}
           onPress={() => toggleSelection("x")} 
         >
           <Image
             source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/5968/5968830.png", // You can replace this with the X icon URL
+              uri: "https://cdn-icons-png.flaticon.com/512/5968/5968830.png", // X icon URL
             }}
             style={styles.icon}
           />
@@ -64,7 +50,7 @@ const Extract = () => {
         <TouchableOpacity
           style={[
             styles.square,
-            selectedIcons.instagram && styles.selectedSquare,
+            selectedIcon === "instagram" && styles.selectedSquare, // Highlight if selected
           ]}
           onPress={() => toggleSelection("instagram")}
         >
@@ -83,7 +69,7 @@ const Extract = () => {
         <TouchableOpacity
           style={[
             styles.square,
-            selectedIcons.facebook && styles.selectedSquare,
+            selectedIcon === "facebook" && styles.selectedSquare, // Highlight if selected
           ]}
           onPress={() => toggleSelection("facebook")}
         >
@@ -99,7 +85,7 @@ const Extract = () => {
         <TouchableOpacity
           style={[
             styles.square,
-            selectedIcons.google && styles.selectedSquare, 
+            selectedIcon === "google" && styles.selectedSquare, // Highlight if selected
           ]}
           onPress={() => toggleSelection("google")} 
         >
@@ -135,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F 8F9FA",
+    backgroundColor: "#F8F9FA",
   },
   heading: {
     fontSize: 24,
@@ -193,6 +179,221 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+// import { useRouter } from 'expo-router';
+
+// const Extract = () => {
+//   const [selectedIcons, setSelectedIcons] = useState({
+//     x: false, 
+//     instagram: false,
+//     facebook: false,
+//     google: false, 
+//   }); 
+//   const router = useRouter();
+
+//   const toggleSelection = (iconName) => {
+//     setSelectedIcons((prev) => ({
+//       ...prev,
+//       [iconName]: !prev[iconName],
+//     }));
+//   };
+
+//   const handleButtonClick = () => {
+//     const selectedPlatforms = Object.keys(selectedIcons).filter(
+//       (icon) => selectedIcons[icon]
+//     );
+
+//     console.log("Selected platforms:", selectedPlatforms);
+
+//     router.push({
+//       pathname: '/displayingIcons',
+//       params: { selectedPlatforms: JSON.stringify(selectedPlatforms) }, 
+//     });
+
+//     setSelectedIcons({
+//       x: false, 
+//       instagram: false,
+//       facebook: false,
+//       google: false, 
+//     });
+//   };
+
+//   const isButtonEnabled = Object.values(selectedIcons).some((value) => value);
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.heading}>Select Your Platform</Text>
+
+//       <View style={styles.row}>
+//         <TouchableOpacity
+//           style={[
+//             styles.square,
+//             selectedIcons.x && styles.selectedSquare,
+//           ]}
+//           onPress={() => toggleSelection("x")} 
+//         >
+//           <Image
+//             source={{
+//               uri: "https://cdn-icons-png.flaticon.com/512/5968/5968830.png", // You can replace this with the X icon URL
+//             }}
+//             style={styles.icon}
+//           />
+//           <Text style={styles.label}>X</Text> 
+//         </TouchableOpacity>
+
+//         <TouchableOpacity
+//           style={[
+//             styles.square,
+//             selectedIcons.instagram && styles.selectedSquare,
+//           ]}
+//           onPress={() => toggleSelection("instagram")}
+//         >
+//           <Image
+//             source={{
+//               uri: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", // Instagram icon URL
+//             }}
+//             style={styles.icon}
+//           />
+//           <Text style={styles.label}>Instagram</Text>
+//         </TouchableOpacity>
+//       </View>
+
+//       {/* Row 2 */}
+//       <View style={styles.row}>
+//         <TouchableOpacity
+//           style={[
+//             styles.square,
+//             selectedIcons.facebook && styles.selectedSquare,
+//           ]}
+//           onPress={() => toggleSelection("facebook")}
+//         >
+//           <Image
+//             source={{
+//               uri: "https://cdn-icons-png.flaticon.com/512/145/145802.png",
+//             }}
+//             style={styles.icon}
+//           />
+//           <Text style={styles.label}>Facebook</Text>
+//         </TouchableOpacity>
+
+//         <TouchableOpacity
+//           style={[
+//             styles.square,
+//             selectedIcons.google && styles.selectedSquare, 
+//           ]}
+//           onPress={() => toggleSelection("google")} 
+//         >
+//           <Image
+//             source={{
+//               uri: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png", 
+//             }}
+//             style={styles.icon}
+//           />
+//           <Text style={styles.label}>Google</Text> 
+//         </TouchableOpacity>
+//       </View>
+
+//       {/* Button */}
+//       <TouchableOpacity
+//         style={[
+//           styles.button,
+//           { backgroundColor: isButtonEnabled ? "#000000" : "#CCCCCC" },
+//         ]}
+//         disabled={!isButtonEnabled}
+//         onPress={handleButtonClick}
+//       >
+//         <Text style={styles.buttonText}>Submit</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// export default Extract;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "#F 8F9FA",
+//   },
+//   heading: {
+//     fontSize: 24,
+//     fontWeight: "600",
+//     marginBottom: 30,
+//     color: "#333333",
+//   },
+//   row: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     width: "75%",
+//     marginBottom: 20,
+//   },
+//   square: {
+//     width: 100,
+//     height: 100,
+//     backgroundColor: '#f9f9f9',
+//     borderRadius: 10,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     shadowColor: "#000",
+//     shadowOffset: {
+//       width: 0,
+//       height: 2,
+//     },
+//     shadowOpacity: 0.0,
+//     shadowRadius: 2,
+//     elevation: 1,
+//   },
+//   selectedSquare: {
+//     borderColor: "#000000",
+//     borderWidth: 2,
+//   },
+//   icon: {
+//     width: 50,
+//     height: 50,
+//     marginBottom: 5,
+//   },
+//   label: {
+//     fontSize: 16,
+//     color: "#333333",
+//   },
+//   button: {     
+//     marginTop: 20,
+//     width: "60%",
+//     paddingVertical: 10,
+//     borderRadius: 8,
+//     backgroundColor: "#000000",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+//   buttonText: {
+//     color: "#FFFFFF",
+//     fontSize: 18,
+//     fontWeight: "bold",
+//   },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import React, { useState } from "react";
 // import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
